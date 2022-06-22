@@ -8,14 +8,16 @@ function App() {
   return (
     <div className="App">
       <h1>Hello World!!</h1>
-      <div className='side'>
-        {/* test 1 */}
-        <Sidebar /> 
+      <div className='wrap'>
+        <div className='side'>
+          {/* test 1 */}
+          <Sidebar /> 
         </div>
         <div className='wall'>
           {/* test 2 */}
           <Wallpaper />
         </div>
+      </div>
     </div>
   );
 }
