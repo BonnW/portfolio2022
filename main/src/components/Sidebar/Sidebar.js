@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
+// import pic from '../../assets/SampleProfilePic.jpg';
 
 
 class Sidebar extends Component {
@@ -10,6 +11,7 @@ class Sidebar extends Component {
 
     return (
       <div className='Root'>
+        {/* <img className='profile' src={pic}/> */}
         <h2>test</h2>
       </div>
     )
