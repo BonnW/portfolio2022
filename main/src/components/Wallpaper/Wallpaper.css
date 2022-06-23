@@ -1,4 +1,8 @@
-.background {
+/* .background {
   border: 10px solid green;
-  margin-left: 160px;
+  margin-left: 200px;
+} */
+
+.background > h2 {
+  /* border: 1px solid blue; */
 }

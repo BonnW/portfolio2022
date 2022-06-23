@@ -1,18 +1,34 @@
-.App {
-  text-align: center;
+html, body {
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
 }
 
-/* .wrap {
-  display: flex;
-} */
+.App {
+  text-align: center;
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+}
 
 .side {
   border: 1px solid black;
   position: fixed;
+  width: 200px;
   height: 100%;
-  width: 160px;
-  
 } 
+
+.wall {
+  border: 5px solid green;
+  /* position: fixed; */
+  margin-left: 200px;
+}
+
+.t3 {
+  /* border: 10px solid pink */
+}
 
 
 /* @media (prefers-reduced-motion: no-preference) {
