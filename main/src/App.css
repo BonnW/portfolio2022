@@ -17,14 +17,17 @@ html, body {
 .side {
   border: 1px solid black;
   /* position: fixed; */
-  width: 200px;
-  /* height: 100%; */
+  min-width: 240px;
+  background-color: #f57e16
 } 
 
 .wall {
-  border: 5px solid green;
   width: 100vw;
   /* position: fixed; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #8e0e00, #470101)
 }
 
 .t3 {

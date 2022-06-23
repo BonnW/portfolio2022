@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Wallpaper.css';
 
+import raccoon from '../../assets/lofiWallpaper.jpg';
 
 class Wallpaper extends Component {
   
@@ -10,8 +11,9 @@ class Wallpaper extends Component {
 
     return (
       <div className='background'>
-        <h2>test2</h2>
-        <h2>test2</h2>
+        <img className='coon' src={raccoon} />
+        {/* <h2>test2</h2>
+        <h2>test2</h2> */}
       </div>
     )
   }
