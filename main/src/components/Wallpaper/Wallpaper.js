@@ -11,7 +11,7 @@ class Wallpaper extends Component {
 
     return (
       <div className='background'>
-        <img className='coon' src={raccoon} />
+        <img className='coon' src={raccoon} alt='coon'/>
         {/* <h2>test2</h2>
         <h2>test2</h2> */}
       </div>
