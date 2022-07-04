@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import Sidebar from './components/Sidebar/Sidebar';
-import Wallpaper from './components/Wallpaper/Wallpaper';
+import Sidebar from './components//Sidebar';
+import Wallpaper from './components/Wallpaper';
 
 function App() {
   return (
     <div className="App">
       <Sidebar />
+      <Wallpaper />
     </div>
   );
 }
