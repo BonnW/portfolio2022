@@ -10,6 +10,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
 import Header from "./Header.js";
+import Projects from "./Projects.js";
 
 const sidebarWidth = 260;
 
@@ -86,7 +87,8 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
         >
-          <h1>hello world</h1>
+          <h1>Hello World</h1>
+          <Projects />
         </Popover>
       </Drawer>
     );
