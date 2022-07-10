@@ -1,7 +1,7 @@
-const Post = require("../models/postSchema");
+const Project = require("../models/projectSchema");
 
-const getPosts = (req, res) => {
-  Post.find({}, (err, posts) => {
+const getProject = (req, res) => {
+  Project.find({}, (err, posts) => {
     if (err) {
       res.status(422);
       res.json({ "Error finding posts: ": err });
@@ -11,8 +11,8 @@ const getPosts = (req, res) => {
   });
 };
 
-const newPost = (req, res) => {};
+const newProject = (req, res) => {};
 
 module.exports = {
-  getPosts,
+  getProject,
 };
