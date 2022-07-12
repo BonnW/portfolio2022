@@ -23,7 +23,6 @@ server.get("/postlist", (req, res) => {
     res.json(posts);
   });
 });
-
 // newPost - create a new post
 
 // deletePost - Deletes post

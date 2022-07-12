@@ -1,6 +1,6 @@
 const Project = require("../models/projectSchema");
 
-const getProject = (req, res) => {
+const getAllProjects = (req, res) => {
   Project.find({}, (err, posts) => {
     if (err) {
       res.status(422);
@@ -13,6 +13,12 @@ const getProject = (req, res) => {
 
 const newProject = (req, res) => {};
 
+const deleteProject = (req, res) => {};
+
+const editProject = (req, res) => {};
+
+const searchByTitle = (req, res) => {};
+
 module.exports = {
-  getProject,
+  getAllProjects,
 };
