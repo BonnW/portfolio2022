@@ -1,4 +1,4 @@
-const Post = require("../models/postSchema");
+const Post = require("./postSchema");
 
 const getPosts = (req, res) => {
   Post.find({}, (err, posts) => {
@@ -10,8 +10,6 @@ const getPosts = (req, res) => {
     res.json(posts);
   });
 };
-
-const newPost = (req, res) => {};
 
 module.exports = {
   getPosts,

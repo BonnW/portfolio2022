@@ -1,34 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+require("dotenv").config();
+
+const app = express();
 const mongoose = require("mongoose");
-const Post = require("./api/models/postSchema.js");
-
-const router = express.Router();
-const port = process.env.PORT || 3000;
-const server = express();
-
-// ERROR CODES
-const STATUS_SERVER_ERROR = 500;
-const STATUS_USER_ERROR = 422;
-
-server.use(bodyParser.json());
-
-// postList - list all posts in db
-server.get("/postlist", (req, res) => {
-  Post.find({}, (err, posts) => {
-    if (err) {
-      res.status(STATUS_SERVER_ERROR).json({ "ERROR: ": err });
-      return;
-    }
-    res.json(posts);
-  });
+// const uri = `mongodb+srv://pwonghansa:${process.env.ATLASKEY}@cluster0.bzltaza.mongodb.net/?retryWrites=true&w=majority`;
+const uri = "mongodb://localhost:27017";
+mongoose.connect(uri, () => {
+  console.log("connected to DB!");
 });
-// newPost - create a new post
 
-// deletePost - Deletes post
+app.use(bodyParser.json());
+const ProjectsRouter = require("./api/Projects");
 
-// projectList - lists all projects in db
+const port = process.env.PORT || 3000;
 
-// addProject - adds project to db
+app.use("/api/projects", ProjectsRouter);
 
-// deleteProject - removes project from db
+app.listen(port);
+console.log("server live on port " + port);
