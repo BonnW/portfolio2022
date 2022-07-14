@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 // require("dotenv").config();
 
 const app = express();
@@ -10,10 +11,11 @@ mongoose.connect(uri, () => {
   console.log("connected to DB!");
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // MIDDLEWARE
 app.use(bodyParser.json());
+app.use(cors());
 
 // ROUTER DECLARATIONS
 const ProjectsRouter = require("./api/Projects");

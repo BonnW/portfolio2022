@@ -21,6 +21,7 @@ class Sidebar extends React.Component {
       AnchorEl: null,
       popOpen: false,
     };
+    // console.log(this.state);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -87,7 +88,6 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
         >
-          <h1>Hello World</h1>
           <Projects />
         </Popover>
       </Drawer>
