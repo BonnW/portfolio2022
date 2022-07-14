@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-require("dotenv").config();
+// require("dotenv").config();
 
 const app = express();
 const mongoose = require("mongoose");
@@ -10,11 +10,15 @@ mongoose.connect(uri, () => {
   console.log("connected to DB!");
 });
 
-app.use(bodyParser.json());
-const ProjectsRouter = require("./api/Projects");
-
 const port = process.env.PORT || 3000;
 
+// MIDDLEWARE
+app.use(bodyParser.json());
+
+// ROUTER DECLARATIONS
+const ProjectsRouter = require("./api/Projects");
+
+// ROUTER ASSIGNMENT
 app.use("/api/projects", ProjectsRouter);
 
 app.listen(port);

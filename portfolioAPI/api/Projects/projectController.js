@@ -1,17 +1,14 @@
 const Project = require("./projectSchema");
-const mongoose = require("mongoose");
-const uri = "mongodb://localhost:27017";
-
-const db = mongoose.connect(uri, () => {
-  console.log("connected to DB!");
-});
 
 const findById = (req, res) => {
-  if (err) {
-    res.json({ "error ": err });
-    return;
-  }
-  res.json("hello world");
+  Project.findOne({ id: req.body.id }, (err, project) => {
+    if (err) {
+      res.json({ error: err });
+      console.log("failed to find one");
+    }
+    res.json(project);
+    console.log("success");
+  });
 };
 
 const getAllProjects = (req, res) => {
@@ -46,7 +43,12 @@ const newProject = (req, res) => {
     });
 };
 
-const deleteProject = (req, res) => {};
+const deleteById = (req, res) => {
+  Project.deleteOne({ id: req.body.id }, (deleted, err) => {
+    if (err) res.json(err);
+    res.json(deleted);
+  });
+};
 
 const editProject = (req, res) => {};
 
@@ -56,4 +58,5 @@ module.exports = {
   findById,
   getAllProjects,
   newProject,
+  deleteById,
 };
