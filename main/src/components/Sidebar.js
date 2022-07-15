@@ -1,5 +1,6 @@
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -88,7 +89,13 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
         >
-          <Projects />
+          <Box
+            sx={{
+              border: "100px solid blue",
+            }}
+          >
+            <Projects />
+          </Box>
         </Popover>
       </Drawer>
     );

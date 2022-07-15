@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -25,17 +26,30 @@ export default function Projects() {
   if (loaded) console.log(data);
 
   return (
-    <Box>
+    <Grid
+      container
+      spacing={2}
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
       {loaded && data
         ? data.map((p) => (
-            <Card key={p._id}>
-              <CardContent>
-                <Typography>{p.title}</Typography>
-                <Typography>{p._id}</Typography>
-              </CardContent>
-            </Card>
+            <Grid item xs={8} key={p._id}>
+              <Card
+                key={p._id}
+                // sx={{
+                //   width: 200,
+                // }}
+              >
+                <CardContent>
+                  <Typography>{p.title}</Typography>
+                  <Typography>{p._id}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           ))
         : "not loaded yet"}
-    </Box>
+    </Grid>
   );
 }
