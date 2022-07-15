@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,33 +7,35 @@ import Typography from "@mui/material/Typography";
 const axios = require("axios");
 
 export default function Projects() {
-  const projectArr = [];
+  const [data, setData] = useState(null);
+  const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
-  const projects = axios
-    .get("http://localhost:5000/api/projects/all")
-    .then((res) => {
-      res.data.forEach((r) => {
-        projectArr.push(r);
-      });
-      // console.log(res.data);
-    });
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/projects/all")
+      .then((res) => {
+        setData(res.data);
+        // console.log(projectArr);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoaded(true));
+  }, []);
 
-  console.log(projectArr);
-
-  const oneProject = async () => {
-    const p = await axios.get("http://localhost:5000/api/projects/test");
-    return p;
-  };
-
-  console.log();
+  if (loaded) console.log(data);
 
   return (
     <Box>
-      <Card>
-        <CardContent>
-          <Typography></Typography>
-        </CardContent>
-      </Card>
+      {loaded && data
+        ? data.map((p) => (
+            <Card key={p._id}>
+              <CardContent>
+                <Typography>{p.title}</Typography>
+                <Typography>{p._id}</Typography>
+              </CardContent>
+            </Card>
+          ))
+        : "not loaded yet"}
     </Box>
   );
 }
