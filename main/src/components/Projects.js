@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const axios = require("axios");
 
@@ -28,37 +29,50 @@ export default function Projects() {
   return (
     <Box
       sx={{
-        border: "5px solid green",
+        border: "2px solid black",
+        padding: "20px",
+        bgcolor: "gray",
       }}
     >
       <Grid
         container
-        spacing={0}
+        spacing={4}
         direction="row"
         justifyContent="space-around"
+        alignItems="center"
         // sx={{
         //   border: "10px solid red",
         // }}
       >
         {loaded && data
           ? data.map((p) => (
-              <Grid item xs={2.5} key={p._id}>
+              <Grid item xs={2} key={p._id}>
                 <Card
+                  // variant="outlined"
                   key={p._id}
-                  sx={{
-                    border: "5px solid black",
-                  }}
+                  sx={
+                    {
+                      // border: "5px solid black",
+                    }
+                  }
                 >
                   <CardContent>
-                    <Typography>{p.title}</Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        mb: 1.5,
+                      }}
+                    >
+                      {p.title}
+                    </Typography>
                     <Typography>{p._id}</Typography>
                     {p.projectTech.map((i) => (
                       <Typography>{i}</Typography>
                     ))}
                     <h1>hello world</h1>
                     <h1>hello world</h1>
-
                     <h1>hello world</h1>
+                    <Typography>{p.projectLink}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
