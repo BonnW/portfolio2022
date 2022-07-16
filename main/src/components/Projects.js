@@ -3,8 +3,12 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
+import Button from "@mui/material/Button";
+
+import pic from "../assets/GitHubLogo.png";
 
 const axios = require("axios");
 
@@ -12,6 +16,8 @@ export default function Projects() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
+
+  const auth = true;
 
   useEffect(() => {
     axios
@@ -30,13 +36,13 @@ export default function Projects() {
     <Box
       sx={{
         border: "2px solid black",
-        padding: "20px",
+        padding: "30px",
         bgcolor: "gray",
       }}
     >
       <Grid
         container
-        spacing={4}
+        spacing={6}
         direction="row"
         justifyContent="space-around"
         alignItems="center"
@@ -46,33 +52,42 @@ export default function Projects() {
       >
         {loaded && data
           ? data.map((p) => (
-              <Grid item xs={2} key={p._id}>
-                <Card
-                  // variant="outlined"
-                  key={p._id}
-                  sx={
-                    {
-                      // border: "5px solid black",
-                    }
-                  }
-                >
+              <Grid item xs={3} key={p._id}>
+                <Card key={p._id}>
                   <CardContent>
-                    <Typography
-                      variant="h4"
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={pic}
+                      alt="green iguana"
                       sx={{
-                        mb: 1.5,
+                        mb: 1.2,
+                      }}
+                    />
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        my: 1,
                       }}
                     >
                       {p.title}
                     </Typography>
-                    <Typography>{p._id}</Typography>
-                    {p.projectTech.map((i) => (
+                    <Typography>{p.details}</Typography>
+                    <Typography>{p.projectTech.join(" - ")}</Typography>
+                    {/* {p.projectTech.map((i) => (
                       <Typography>{i}</Typography>
-                    ))}
-                    <h1>hello world</h1>
-                    <h1>hello world</h1>
-                    <h1>hello world</h1>
+                    ))} */}
                     <Typography>{p.projectLink}</Typography>
+                    {auth ? (
+                      <CardActions>
+                        <Button>Edit</Button>
+                        <Button>Delete</Button>
+                      </CardActions>
+                    ) : null}
+                    {/* <CardActions>
+                      <Button>Edit</Button>
+                      <Button>Delete</Button>
+                    </CardActions> */}
                   </CardContent>
                 </Card>
               </Grid>

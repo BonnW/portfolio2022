@@ -81,6 +81,7 @@ class Sidebar extends React.Component {
           open={this.state.popOpen}
           anchorEl={this.state.AnchorEl}
           onClose={this.handleClose}
+          canAutoPosition={false}
           anchorOrigin={{
             vertical: "center",
             horizontal: "right",
@@ -94,8 +95,8 @@ class Sidebar extends React.Component {
           //   border: "5px solid red",
           // }}
         >
-          <Projects />
           {/* <h1>hello world</h1> */}
+          <Projects />
         </Popover>
       </Drawer>
     );
