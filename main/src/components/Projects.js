@@ -26,30 +26,58 @@ export default function Projects() {
   if (loaded) console.log(data);
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
+    <Box
+      sx={{
+        border: "5px solid green",
+      }}
     >
-      {loaded && data
-        ? data.map((p) => (
-            <Grid item xs={8} key={p._id}>
-              <Card
-                key={p._id}
-                // sx={{
-                //   width: 200,
-                // }}
-              >
-                <CardContent>
-                  <Typography>{p.title}</Typography>
-                  <Typography>{p._id}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
-        : "not loaded yet"}
-    </Grid>
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        justifyContent="space-around"
+        // sx={{
+        //   border: "10px solid red",
+        // }}
+      >
+        {loaded && data
+          ? data.map((p) => (
+              <Grid item xs={2.5} key={p._id}>
+                <Card
+                  key={p._id}
+                  sx={{
+                    border: "5px solid black",
+                  }}
+                >
+                  <CardContent>
+                    <Typography>{p.title}</Typography>
+                    <Typography>{p._id}</Typography>
+                    {p.projectTech.map((i) => (
+                      <Typography>{i}</Typography>
+                    ))}
+                    <h1>hello world</h1>
+                    <h1>hello world</h1>
+
+                    <h1>hello world</h1>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          : "FAILED"}
+      </Grid>
+    </Box>
   );
 }
+
+// TEMP STORAGE
+// (<Grid item xs={8} key='failed get'>
+//           <Card
+//             // sx={{
+//             //   width: 200,
+//             // }}
+//           >
+//             <CardContent>
+//               <Typography>failed to get</Typography>
+//             </CardContent>
+//           </Card>
+//         </Grid>)

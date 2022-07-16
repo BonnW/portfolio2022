@@ -48,6 +48,7 @@ class Sidebar extends React.Component {
           "& .MuiDrawer-paper": {
             width: sidebarWidth,
             boxSizing: "border-box",
+            borderRight: "1px solid black",
             background:
               "linear-gradient(0deg, hsla(20, 69%, 61%, 1) 0%, hsla(272, 31%, 10%, 1) 100%)",
           },
@@ -88,14 +89,13 @@ class Sidebar extends React.Component {
             vertical: "center",
             horizontal: "left",
           }}
+          // *NOTE* FOR DEBUGGING
+          // sx={{
+          //   border: "5px solid red",
+          // }}
         >
-          <Box
-            sx={{
-              border: "100px solid blue",
-            }}
-          >
-            <Projects />
-          </Box>
+          <Projects />
+          {/* <h1>hello world</h1> */}
         </Popover>
       </Drawer>
     );
