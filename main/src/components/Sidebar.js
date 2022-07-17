@@ -1,6 +1,5 @@
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -11,7 +10,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
 import Header from "./Header.js";
-import Projects from "./Projects.js";
+import Projects from "./Projects/Projects.js";
 
 const sidebarWidth = 260;
 
@@ -81,7 +80,6 @@ class Sidebar extends React.Component {
           open={this.state.popOpen}
           anchorEl={this.state.AnchorEl}
           onClose={this.handleClose}
-          canAutoPosition={false}
           anchorOrigin={{
             vertical: "center",
             horizontal: "right",

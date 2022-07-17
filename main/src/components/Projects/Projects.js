@@ -8,7 +8,9 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import pic from "../assets/GitHubLogo.png";
+import pic from "../../assets/GitHubLogo.png";
+
+import ProjectCard from "./ProjectCard";
 
 const axios = require("axios");
 
@@ -30,6 +32,19 @@ export default function Projects() {
       .finally(() => setLoaded(true));
   }, []);
 
+  function deleteProject(id) {
+    axios
+      .delete("http://localhost:5000/api/projects/delete", {
+        data: { _id: id },
+      })
+      .then((res) => {
+        setData(data.filter((item) => item !== res._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
+        console.log("deleted ", res);
+      })
+      .catch((err) => setError(err));
+    console.log(data);
+  }
+
   if (loaded) console.log(data);
 
   return (
@@ -37,7 +52,7 @@ export default function Projects() {
       sx={{
         border: "2px solid black",
         padding: "30px",
-        bgcolor: "gray",
+        bgcolor: "#b56147",
       }}
     >
       <Grid
@@ -52,16 +67,23 @@ export default function Projects() {
       >
         {loaded && data
           ? data.map((p) => (
-              <Grid item xs={3} key={p._id}>
-                <Card key={p._id}>
+              <Grid item xs={2} key={p._id}>
+                <Card
+                  key={p._id}
+                  sx={{
+                    bgcolor: "#fdf6c0",
+                  }}
+                >
                   <CardContent>
                     <CardMedia
                       component="img"
                       height="200"
                       image={pic}
-                      alt="green iguana"
+                      alt="github logo"
                       sx={{
                         mb: 1.2,
+                        border: "1px solid black",
+                        borderRadius: 2,
                       }}
                     />
                     <Typography
@@ -72,22 +94,17 @@ export default function Projects() {
                     >
                       {p.title}
                     </Typography>
-                    <Typography>{p.details}</Typography>
+                    <Typography gutterBottom>{p.details}</Typography>
                     <Typography>{p.projectTech.join(" - ")}</Typography>
-                    {/* {p.projectTech.map((i) => (
-                      <Typography>{i}</Typography>
-                    ))} */}
-                    <Typography>{p.projectLink}</Typography>
+                    <Typography variant="button">{p.projectLink}</Typography>
                     {auth ? (
                       <CardActions>
                         <Button>Edit</Button>
-                        <Button>Delete</Button>
+                        <Button onClick={() => deleteProject(p._id)}>
+                          Delete
+                        </Button>
                       </CardActions>
                     ) : null}
-                    {/* <CardActions>
-                      <Button>Edit</Button>
-                      <Button>Delete</Button>
-                    </CardActions> */}
                   </CardContent>
                 </Card>
               </Grid>
@@ -97,16 +114,3 @@ export default function Projects() {
     </Box>
   );
 }
-
-// TEMP STORAGE
-// (<Grid item xs={8} key='failed get'>
-//           <Card
-//             // sx={{
-//             //   width: 200,
-//             // }}
-//           >
-//             <CardContent>
-//               <Typography>failed to get</Typography>
-//             </CardContent>
-//           </Card>
-//         </Grid>)

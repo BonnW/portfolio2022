@@ -29,8 +29,6 @@ const newProject = (req, res) => {
     projectTech: req.body.projectTech,
     projectLink: req.body.projectLink,
   });
-  console.log(project);
-
   project
     .save()
     .then((data) => {
@@ -46,7 +44,6 @@ const newProject = (req, res) => {
 const deleteById = (req, res) => {
   Project.deleteOne({ id: req.body.id }, (deleted, err) => {
     if (err) res.json(err);
-    res.json(deleted);
   });
 };
 
