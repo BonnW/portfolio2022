@@ -42,8 +42,9 @@ const newProject = (req, res) => {
 };
 
 const deleteById = (req, res) => {
-  Project.deleteOne({ id: req.body.id }, (deleted, err) => {
+  Project.findOneAndDelete(req.body.id, (err, deleted) => {
     if (err) res.json(err);
+    res.json(deleted);
   });
 };
 
@@ -57,3 +58,12 @@ module.exports = {
   newProject,
   deleteById,
 };
+
+// const deleteById = (req, res) => {
+//   const deletedRecord = req.body;
+//   Project.deleteOne({ id: req.body.id }, (err, deleted) => {
+//     if (err) res.json(err);
+//     console.log(deleted);
+//     res.json(deletedRecord);
+//   });
+// };
