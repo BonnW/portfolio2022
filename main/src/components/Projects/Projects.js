@@ -38,11 +38,12 @@ export default function Projects() {
         data: { _id: id },
       })
       .then((res) => {
-        setData(data.filter((data) => data !== res._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
+        setData(data.filter((data) => data._id != res.data._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
+        // console.log();
         console.log("deleted ", res);
       })
       .catch((err) => setError(err));
-    console.log(data);
+    // console.log(data);
   }
 
   if (loaded) console.log(data);
