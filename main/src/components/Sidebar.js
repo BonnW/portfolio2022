@@ -10,6 +10,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
 import Header from "./Header.js";
+import Projects from "./Projects/Projects.js";
+import Posts from "./Posts/Posts.js";
 
 const sidebarWidth = 260;
 
@@ -19,10 +21,14 @@ class Sidebar extends React.Component {
     this.state = {
       AnchorEl: null,
       popOpen: false,
+      openElement: null,
     };
+    // console.log(this.state);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleElement = this.handleElement.bind(this);
+    this.renderSwitch = this.renderSwitch.bind(this);
   }
 
   handleClick(e) {
@@ -34,6 +40,22 @@ class Sidebar extends React.Component {
 
   handleClose() {
     this.setState({ AnchorEl: null, popOpen: !this.state.popOpen });
+    // console.log(this.state);
+  }
+
+  handleElement(t) {
+    this.setState({ openElement: t.text });
+  }
+
+  renderSwitch(element) {
+    switch (element) {
+      case "About Me":
+        return <Posts />;
+      case "Projects":
+        return <Projects />;
+      default:
+        return <Projects />;
+    }
   }
 
   render() {
@@ -45,6 +67,7 @@ class Sidebar extends React.Component {
           "& .MuiDrawer-paper": {
             width: sidebarWidth,
             boxSizing: "border-box",
+            borderRight: "1px solid black",
             background:
               "linear-gradient(0deg, hsla(20, 69%, 61%, 1) 0%, hsla(272, 31%, 10%, 1) 100%)",
           },
@@ -56,7 +79,12 @@ class Sidebar extends React.Component {
         <List>
           {["About Me", "Projects", "Resume"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton onClick={this.handleClick}>
+              <ListItemButton
+                onClick={(e) => {
+                  this.handleClick(e);
+                  this.handleElement({ text });
+                }}
+              >
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -86,7 +114,8 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
         >
-          <h1>hello world</h1>
+          {/* <h1>hello world</h1> */}
+          {this.renderSwitch(this.state.openElement)}
         </Popover>
       </Drawer>
     );
