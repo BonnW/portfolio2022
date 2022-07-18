@@ -11,6 +11,7 @@ import MailIcon from "@mui/icons-material/Mail";
 
 import Header from "./Header.js";
 import Projects from "./Projects/Projects.js";
+import Posts from "./Posts/Posts.js";
 
 const sidebarWidth = 260;
 
@@ -20,11 +21,14 @@ class Sidebar extends React.Component {
     this.state = {
       AnchorEl: null,
       popOpen: false,
+      openElement: null,
     };
     // console.log(this.state);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleElement = this.handleElement.bind(this);
+    this.renderSwitch = this.renderSwitch.bind(this);
   }
 
   handleClick(e) {
@@ -36,6 +40,22 @@ class Sidebar extends React.Component {
 
   handleClose() {
     this.setState({ AnchorEl: null, popOpen: !this.state.popOpen });
+    // console.log(this.state);
+  }
+
+  handleElement(t) {
+    this.setState({ openElement: t.text });
+  }
+
+  renderSwitch(element) {
+    switch (element) {
+      case "About Me":
+        return <Posts />;
+      case "Projects":
+        return <Projects />;
+      default:
+        return <Projects />;
+    }
   }
 
   render() {
@@ -59,7 +79,12 @@ class Sidebar extends React.Component {
         <List>
           {["About Me", "Projects", "Resume"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton onClick={this.handleClick}>
+              <ListItemButton
+                onClick={(e) => {
+                  this.handleClick(e);
+                  this.handleElement({ text });
+                }}
+              >
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -88,13 +113,9 @@ class Sidebar extends React.Component {
             vertical: "center",
             horizontal: "left",
           }}
-          // *NOTE* FOR DEBUGGING
-          // sx={{
-          //   border: "5px solid red",
-          // }}
         >
           {/* <h1>hello world</h1> */}
-          <Projects />
+          {this.renderSwitch(this.state.openElement)}
         </Popover>
       </Drawer>
     );

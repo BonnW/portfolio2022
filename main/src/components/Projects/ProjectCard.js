@@ -11,22 +11,10 @@ import pic from "../../assets/GitHubLogo.png";
 const auth = true;
 const axios = require("axios");
 
-export default function ProjectCard(p) {
-  function deleteProject(id) {
-    axios
-      .delete("http://localhost:5000/api/projects/delete", {
-        data: { id: id },
-      })
-      .then((res) => {
-        console.log("deleted ", res);
-      })
-      .catch((err) => console.log(err));
-    // console.log("deleting " + id);
-  }
-
+export default function ProjectCard(props) {
   return (
     <Card
-      key={p.props._id}
+      key={props.projects._id}
       sx={{
         bgcolor: "#fdf6c0",
       }}
@@ -49,17 +37,17 @@ export default function ProjectCard(p) {
             my: 1,
           }}
         >
-          {p.props.title}
+          {props.projects.title}
         </Typography>
-        <Typography gutterBottom>{p.props.details}</Typography>
-        <Typography>{p.props.projectTech.join(" - ")}</Typography>
-        <Typography variant="button">{p.props.projectLink}</Typography>
+        <Typography gutterBottom>{props.projects.details}</Typography>
+        <Typography>{props.projects.projectTech.join(" - ")}</Typography>
+        <Typography variant="button">{props.projects.projectLink}</Typography>
         {auth ? (
           <CardActions>
             <Button>Edit</Button>
             <Button
               onClick={() => {
-                deleteProject(p.props._id);
+                props.deleteProject(props.projects._id);
               }}
             >
               Delete

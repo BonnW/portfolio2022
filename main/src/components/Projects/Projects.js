@@ -38,7 +38,7 @@ export default function Projects() {
         data: { _id: id },
       })
       .then((res) => {
-        setData(data.filter((item) => item !== res._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
+        setData(data.filter((data) => data !== res._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
         console.log("deleted ", res);
       })
       .catch((err) => setError(err));
@@ -68,45 +68,10 @@ export default function Projects() {
         {loaded && data
           ? data.map((p) => (
               <Grid item xs={2} key={p._id}>
-                <Card
-                  key={p._id}
-                  sx={{
-                    bgcolor: "#fdf6c0",
-                  }}
-                >
-                  <CardContent>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={pic}
-                      alt="github logo"
-                      sx={{
-                        mb: 1.2,
-                        border: "1px solid black",
-                        borderRadius: 2,
-                      }}
-                    />
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        my: 1,
-                      }}
-                    >
-                      {p.title}
-                    </Typography>
-                    <Typography gutterBottom>{p.details}</Typography>
-                    <Typography>{p.projectTech.join(" - ")}</Typography>
-                    <Typography variant="button">{p.projectLink}</Typography>
-                    {auth ? (
-                      <CardActions>
-                        <Button>Edit</Button>
-                        <Button onClick={() => deleteProject(p._id)}>
-                          Delete
-                        </Button>
-                      </CardActions>
-                    ) : null}
-                  </CardContent>
-                </Card>
+                <ProjectCard
+                  projects={p}
+                  deleteProject={() => deleteProject()}
+                />
               </Grid>
             ))
           : "FAILED"}
