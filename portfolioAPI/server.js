@@ -19,9 +19,11 @@ app.use(cors());
 
 // ROUTER DECLARATIONS
 const ProjectsRouter = require("./api/Projects");
+const PostsRouter = require("./api/Posts");
 
 // ROUTER ASSIGNMENT
 app.use("/api/projects", ProjectsRouter);
+app.use("/api/posts", PostsRouter);
 
 app.listen(port);
 console.log("server live on port " + port);

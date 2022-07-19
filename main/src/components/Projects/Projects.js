@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-
-import pic from "../../assets/GitHubLogo.png";
 
 import ProjectCard from "./ProjectCard";
 
@@ -26,7 +18,6 @@ export default function Projects() {
       .get("http://localhost:5000/api/projects/all")
       .then((res) => {
         setData(res.data);
-        // console.log(projectArr);
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoaded(true));
