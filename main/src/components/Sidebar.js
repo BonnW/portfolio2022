@@ -1,4 +1,4 @@
-import * as React from "react";
+import { React, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -15,113 +15,198 @@ import Posts from "./Posts/Posts.js";
 
 const sidebarWidth = 260;
 
-class Sidebar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      AnchorEl: null,
-      popOpen: false,
-      openElement: null,
-    };
+export default function Sidebar() {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openEl, setOpenEl] = useState(null);
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleElement = this.handleElement.bind(this);
-    this.renderSwitch = this.renderSwitch.bind(this);
-  }
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
 
-  handleClick(e) {
-    console.log(this.state.AnchorEl);
-    if (!this.state.AnchorEl) {
-      this.setState({
-        AnchorEl: e.currentTarget,
-      });
-    }
-    // this.setState({ popOpen: !this.state.popOpen });
-  }
+  const handleClose = () => {
+    // console.log(this.state.AnchorEl);
+    setAnchorEl(null);
+  };
 
-  handleClose() {
-    console.log(this.state.AnchorEl);
-    this.setState({ AnchorEl: null, popOpen: !this.state.popOpen });
-  }
+  const handleElement = (t) => {
+    setOpenEl(t.text);
+  };
 
-  handleElement(t) {
-    this.setState({ openElement: t.text });
-  }
-
-  renderSwitch(element) {
+  const renderSwitch = (element) => {
     switch (element) {
       case "About Me":
         return <Posts />;
       case "Projects":
         return <Projects />;
       default:
-        return <Projects />;
+        return null;
     }
-  }
+  };
 
-  render() {
-    return (
-      <Drawer
-        sx={{
+  const open = Boolean(anchorEl);
+
+  return (
+    <Drawer
+      sx={{
+        width: sidebarWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
           width: sidebarWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: sidebarWidth,
-            boxSizing: "border-box",
-            borderRight: "1px solid black",
-            background:
-              "linear-gradient(0deg, hsla(20, 69%, 61%, 1) 0%, hsla(272, 31%, 10%, 1) 100%)",
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Header />
-        <List>
-          {["About Me", "Projects", "Resume"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
-                onClick={(e) => {
-                  this.handleClick(e);
-                  this.handleElement({ text });
+          boxSizing: "border-box",
+          borderRight: "1px solid black",
+          background:
+            "linear-gradient(0deg, hsla(20, 69%, 61%, 1) 0%, hsla(272, 31%, 10%, 1) 100%)",
+        },
+      }}
+      variant="permanent"
+      anchor="left"
+    >
+      <Header />
+      <List>
+        {["About Me", "Projects", "Resume"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton
+              onClick={(e) => {
+                handleClick(e);
+                handleElement({ text });
+              }}
+            >
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText
+                primary={text}
+                sx={{ color: "white" }}
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "bold",
                 }}
-              >
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={{ color: "white" }}
-                  primaryTypographyProps={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-
-        <Popover
-          id="simple-popover"
-          open={this.state.AnchorEl}
-          anchorEl={this.state.AnchorEl}
-          onClose={this.handleClose}
-          anchorOrigin={{
-            vertical: "center",
-            horizontal: "right",
-          }}
-          transformOrigin={{
-            vertical: "center",
-            horizontal: "left",
-          }}
-        >
-          {this.renderSwitch(this.state.openElement)}
-        </Popover>
-      </Drawer>
-    );
-  }
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Popover
+        id="simple-popover"
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "center",
+          horizontal: "left",
+        }}
+      >
+        {/* {renderSwitch(this.state.openElement)} */}
+      </Popover>
+    </Drawer>
+  );
 }
 
-export default Sidebar;
+// class Sidebar extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       AnchorEl: null,
+//       popOpen: false,
+//       openElement: null,
+//     };
+
+//     this.handleClick = this.handleClick.bind(this);
+//     this.handleClose = this.handleClose.bind(this);
+//     this.handleElement = this.handleElement.bind(this);
+//     this.renderSwitch = this.renderSwitch.bind(this);
+//     // this.renderElement = this.renderElement.bind(this);
+//   }
+
+//   handleClick(e) {
+//     this.setState({ AnchorEl: e.currentTarget, popOpen: !this.state.popOpen });
+//   }
+
+//   handleClose() {
+//     // console.log(this.state.AnchorEl);
+//     this.setState({ AnchorEl: null, popOpen: !this.state.popOpen });
+//   }
+
+//   handleElement(t) {
+//     this.setState({ openElement: t.text });
+//   }
+
+//   renderSwitch(element) {
+//     switch (element) {
+//       case "About Me":
+//         return <Posts />;
+//       case "Projects":
+//         return <Projects />;
+//       default:
+//         return null;
+//     }
+//   }
+
+//   render() {
+//     return (
+//       <Drawer
+//         sx={{
+//           width: sidebarWidth,
+//           flexShrink: 0,
+//           "& .MuiDrawer-paper": {
+//             width: sidebarWidth,
+//             boxSizing: "border-box",
+//             borderRight: "1px solid black",
+//             background:
+//               "linear-gradient(0deg, hsla(20, 69%, 61%, 1) 0%, hsla(272, 31%, 10%, 1) 100%)",
+//           },
+//         }}
+//         variant="permanent"
+//         anchor="left"
+//       >
+//         <Header />
+//         <List>
+//           {["About Me", "Projects", "Resume"].map((text, index) => (
+//             <ListItem key={text} disablePadding>
+//               <ListItemButton
+//                 onClick={(e) => {
+//                   this.handleClick(e);
+//                   this.handleElement({ text });
+//                 }}
+//               >
+//                 <ListItemIcon>
+//                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+//                 </ListItemIcon>
+//                 <ListItemText
+//                   primary={text}
+//                   sx={{ color: "white" }}
+//                   primaryTypographyProps={{
+//                     fontSize: 18,
+//                     fontWeight: "bold",
+//                   }}
+//                 />
+//               </ListItemButton>
+//             </ListItem>
+//           ))}
+//         </List>
+//         <Popover
+//           id="simple-popover"
+//           open={this.state.AnchorEl}
+//           anchorEl={this.state.AnchorEl}
+//           onClose={this.handleClose}
+//           anchorOrigin={{
+//             vertical: "center",
+//             horizontal: "right",
+//           }}
+//           transformOrigin={{
+//             vertical: "center",
+//             horizontal: "left",
+//           }}
+//         >
+//           {/* <h5>test</h5> */}
+//           {console.log(this.state.AnchorEl)}
+//           {this.renderSwitch(this.state.openElement)}
+//         </Popover>
+//       </Drawer>
+//     );
+//   }
+// }
