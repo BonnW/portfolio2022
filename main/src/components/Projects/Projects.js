@@ -29,7 +29,7 @@ export default function Projects() {
         data: { _id: id },
       })
       .then((res) => {
-        setData(data.filter((data) => data._id != res.data._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
+        setData(data.filter((data) => data._id != res.data._id));
         // console.log();
         console.log("deleted ", res);
       })

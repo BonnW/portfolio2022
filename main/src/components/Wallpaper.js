@@ -14,7 +14,6 @@ class Wallpaper extends Component {
         component="main"
         sx={{
           ml: "260px",
-          flexGrow: 1,
           backgroundImage: `url(${lofi})`,
           backgroundColor: "green",
           height: "100vh",

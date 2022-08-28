@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import pic from "../../assets/GitHubLogo.png";
 
 const auth = true;
-const axios = require("axios");
 
 export default function ProjectCard(props) {
   return (
@@ -22,7 +21,7 @@ export default function ProjectCard(props) {
       <CardContent>
         <CardMedia
           component="img"
-          height="200"
+          height="100"
           image={pic}
           alt="github logo"
           sx={{

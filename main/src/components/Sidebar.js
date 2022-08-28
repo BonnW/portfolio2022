@@ -23,7 +23,6 @@ class Sidebar extends React.Component {
       popOpen: false,
       openElement: null,
     };
-    // console.log(this.state);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -32,15 +31,18 @@ class Sidebar extends React.Component {
   }
 
   handleClick(e) {
+    console.log(this.state.AnchorEl);
     if (!this.state.AnchorEl) {
-      this.setState({ AnchorEl: e.currentTarget });
+      this.setState({
+        AnchorEl: e.currentTarget,
+      });
     }
-    this.setState({ popOpen: !this.state.popOpen });
+    // this.setState({ popOpen: !this.state.popOpen });
   }
 
   handleClose() {
+    console.log(this.state.AnchorEl);
     this.setState({ AnchorEl: null, popOpen: !this.state.popOpen });
-    // console.log(this.state);
   }
 
   handleElement(t) {
@@ -100,9 +102,10 @@ class Sidebar extends React.Component {
             </ListItem>
           ))}
         </List>
+
         <Popover
           id="simple-popover"
-          open={this.state.popOpen}
+          open={this.state.AnchorEl}
           anchorEl={this.state.AnchorEl}
           onClose={this.handleClose}
           anchorOrigin={{
@@ -114,7 +117,6 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
         >
-          {/* <h1>hello world</h1> */}
           {this.renderSwitch(this.state.openElement)}
         </Popover>
       </Drawer>
