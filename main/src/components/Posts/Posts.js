@@ -18,8 +18,6 @@ export default function Posts() {
       .finally(() => setLoaded(true));
   }, []);
 
-  if (loaded) console.log(post);
-
   return (
     <Box>
       {loaded && post

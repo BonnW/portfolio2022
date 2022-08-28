@@ -37,8 +37,6 @@ export default function Projects() {
     // console.log(data);
   }
 
-  if (loaded) console.log(data);
-
   return (
     <Box
       sx={{
