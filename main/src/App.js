@@ -7,7 +7,7 @@ import Sidebar from "./components//Sidebar";
 import Wallpaper from "./components/Wallpaper";
 
 function App() {
-  const matches = useMediaQuery("(min-width:900px)");
+  const matches = useMediaQuery("(min-width:600px)");
 
   return (
     <div className="App">

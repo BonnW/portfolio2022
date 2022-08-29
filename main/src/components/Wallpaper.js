@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Box from "@mui/material/Box";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import lofi from "../assets/lofiWallpaper.jpg";
 
@@ -7,22 +8,22 @@ import lofi from "../assets/lofiWallpaper.jpg";
 // STREAM MINI YOUTUBE PLAYER IN BACKGROUND.
 // VISITORS ON ARRIVAL, VIDEO PAUSED. CAN PLAY AT WILL. AND/AOR MINIMIZE
 
-class Wallpaper extends Component {
-  render() {
-    return (
-      <Box
-        component="main"
-        sx={{
-          ml: "260px",
-          backgroundImage: `url(${lofi})`,
-          backgroundColor: "green",
-          height: "100vh",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      ></Box>
-    );
-  }
-}
+export default function Wallpaper() {
+  const matches = useMediaQuery("(min-width:600px)");
 
-export default Wallpaper;
+  const mobileView = matches ? "260px" : null;
+
+  return (
+    <Box
+      component="main"
+      sx={{
+        ml: mobileView,
+        backgroundImage: `url(${lofi})`,
+        backgroundColor: "green",
+        height: "100vh",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    ></Box>
+  );
+}

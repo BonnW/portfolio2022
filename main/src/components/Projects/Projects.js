@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Popover from "@mui/material/Popover";
+
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import ProjectCard from "./ProjectCard";
 
 const axios = require("axios");
 
-export default function Projects() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState("");
-  const [loaded, setLoaded] = useState(false);
+export default function Projects({ anchorEl, data }) {
+  const matches = useMediaQuery("(min-width:1400px)");
 
-  const auth = true;
+  const transformCardSize = matches ? 3 : 4;
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/projects/all")
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoaded(true));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/api/projects/all")
+  //     .then((res) => {
+  //       setData(res.data);
+  //     })
+  //     .catch((err) => setError(err.message))
+  //     .finally(() => setLoaded(true));
+  // }, []);
 
   function deleteProject(id) {
     axios
@@ -29,43 +30,41 @@ export default function Projects() {
         data: { _id: id },
       })
       .then((res) => {
-        setData(data.filter((data) => data._id != res.data._id));
-        // console.log();
         console.log("deleted ", res);
       })
-      .catch((err) => setError(err));
-    // console.log(data);
+      .catch((err) => console.log(err));
   }
 
-  return (
-    <Box
-      sx={{
-        border: "2px solid black",
-        padding: "30px",
-        bgcolor: "#b56147",
-      }}
-    >
-      <Grid
-        container
-        spacing={6}
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center"
-        // sx={{
-        //   border: "10px solid red",
-        // }}
+  if (data)
+    return (
+      <Box
+        sx={{
+          border: "2px solid black",
+          padding: "30px",
+          bgcolor: "#b56147",
+          height: "100%",
+        }}
       >
-        {loaded && data
-          ? data.map((p) => (
-              <Grid item xs={2} key={p._id}>
-                <ProjectCard
-                  projects={p}
-                  deleteProject={() => deleteProject()}
-                />
-              </Grid>
-            ))
-          : "FAILED"}
-      </Grid>
-    </Box>
-  );
+        <Grid
+          container
+          spacing={4}
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          {data
+            ? data.map((p) => (
+                <Grid item xs={transformCardSize} key={p._id}>
+                  <ProjectCard
+                    projects={p}
+                    deleteProject={() => deleteProject()}
+                  />
+                </Grid>
+              ))
+            : "Failed fetching Projects"}
+        </Grid>
+      </Box>
+    );
+
+  return null;
 }
