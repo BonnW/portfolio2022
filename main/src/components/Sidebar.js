@@ -9,13 +9,14 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Popover from "@mui/material/Popover";
 
-import Header from "./Header.js";
+import Header from "./Header/Header.js";
 import Projects from "./Projects/Projects.js";
 import Posts from "./Posts/Posts.js";
 
 const axios = require("axios"); // to fetch data before displaying popover
 
 const sidebarWidth = 260;
+const navList = ["About Me", "Projects", "Resume"];
 
 export default function Sidebar() {
   const [data, setData] = useState(null);
@@ -27,7 +28,7 @@ export default function Sidebar() {
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
     axios
-      .get("http://localhost:5000/api/projects/all")
+      .get("http://localhost:6000/api/projects/all")
       .then((res) => {
         setData(res.data);
       })

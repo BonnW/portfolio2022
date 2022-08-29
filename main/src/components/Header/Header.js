@@ -8,7 +8,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
-import pic from "../assets/SampleProfilePic.jpg";
+import pic from "../../assets/SampleProfilePic.jpg";
 
 export default function Header() {
   return (

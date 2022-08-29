@@ -10,7 +10,7 @@ export default function Posts() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/posts/all")
+      .get("http://localhost:6000/api/posts/all")
       .then((res) => {
         setPosts(res.data);
       })
