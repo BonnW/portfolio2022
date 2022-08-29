@@ -7,15 +7,15 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
-export default function Nav({ navList }) {
+export default function Nav({ navList, handleClick, handleElement }) {
   return (
     <List>
       {navList.map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton
             onClick={(e) => {
-              handleClick(e);
               handleElement({ text });
+              handleClick(e);
             }}
           >
             <ListItemIcon>

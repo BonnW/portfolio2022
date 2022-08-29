@@ -1,26 +1,22 @@
 import { React, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import Popover from "@mui/material/Popover";
 
 import Header from "./Header/Header.js";
+import Nav from "./Nav/Nav.js";
 import Projects from "./Projects/Projects.js";
+import Resume from "./resume.js";
 import Posts from "./Posts/Posts.js";
 
 const axios = require("axios"); // to fetch data before displaying popover
 
 const sidebarWidth = 260;
-const navList = ["About Me", "Projects", "Resume"];
+const navList = ["Projects", "Experiences", "Skills & Interests"];
 
 export default function Sidebar() {
   const [data, setData] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [popOpen, setPopOpen] = useState(false);
   const [elName, setElName] = useState(null); // ugly solution
 
   const open = Boolean(anchorEl);
@@ -28,9 +24,10 @@ export default function Sidebar() {
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
     axios
-      .get("http://localhost:6000/api/projects/all")
+      .get(`http://localhost:5000/api/projects/all`)
       .then((res) => {
         setData(res.data);
+        setPopOpen(true);
       })
       .catch((err) => {
         console.log(`Error Fetching: ${err}`);
@@ -39,8 +36,9 @@ export default function Sidebar() {
 
   const handleClose = () => {
     // console.log(this.state.AnchorEl);
-    setAnchorEl(null);
     setData(null);
+    setAnchorEl(null);
+    setElName(null);
   };
 
   const handleElement = (t) => {
@@ -48,13 +46,15 @@ export default function Sidebar() {
   };
 
   const renderSwitch = (element) => {
-    switch (element) {
-      case "About Me":
-        return <Posts />;
-      case "Projects":
-        return <Projects anchor={anchorEl} data={data} open={open} />;
-      default:
-        return null;
+    if (popOpen) {
+      switch (element) {
+        case "Posts":
+          return <Posts />;
+        case "Projects":
+          return <Projects anchor={anchorEl} data={data} open={open} />;
+        default:
+          return <Resume />;
+      }
     }
   };
 
@@ -75,30 +75,11 @@ export default function Sidebar() {
       anchor="left"
     >
       <Header />
-      <List>
-        {["About Me", "Projects", "Resume"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              onClick={(e) => {
-                handleClick(e);
-                handleElement({ text });
-              }}
-            >
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={{ color: "white" }}
-                primaryTypographyProps={{
-                  fontSize: 18,
-                  fontWeight: "bold",
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Nav
+        navList={navList}
+        handleClick={handleClick}
+        handleElement={handleElement}
+      />
       <Popover
         id="simple-popover"
         open={open}
@@ -118,9 +99,8 @@ export default function Sidebar() {
           },
         }}
       >
-        {open ? renderSwitch(elName) : null}
+        {renderSwitch(elName)}
       </Popover>
-      {/* {openEl ? renderSwitch(elName) : null} */}
     </Drawer>
   );
 }

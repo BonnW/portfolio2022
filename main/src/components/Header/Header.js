@@ -49,7 +49,7 @@ export default function Header() {
           pb: 2,
         }}
       >
-        Full-Stack Developer
+        Software-Developer
       </Typography>
       <Box
         sx={{
