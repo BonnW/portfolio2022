@@ -5,8 +5,8 @@ const cors = require("cors");
 
 const app = express();
 const mongoose = require("mongoose");
-// const uri = `mongodb+srv://pwonghansa:${process.env.ATLASKEY}@cluster0.bzltaza.mongodb.net/?retryWrites=true&w=majority`;
-const uri = "mongodb+srv://pwonghansa:<password>@cluster0.bzltaza.mongodb.net/test";
+const uri = "mongodb://localhost:27017/";
+// const uri = "mongodb+srv://pwonghansa:<password>@cluster0.bzltaza.mongodb.net/test";
 mongoose.connect(uri, () => {
   console.log("connected to DB!");
 });
