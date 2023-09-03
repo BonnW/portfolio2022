@@ -8,8 +8,15 @@ const UserSchema = new mongoose.Schema({
     },
 
     lastName: {
-        type: String,,
+        type: String,
         require: true,
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 
 })
+
+module.exports = mongoose.model("User", UserSchema);
