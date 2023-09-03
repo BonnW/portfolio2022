@@ -63,6 +63,7 @@ const delUser = (req, res) => {
 module.exports = {
   getUsers,
   getUserById,
+  addUser,
   editUser,
   delUser,
 };
