@@ -5,6 +5,7 @@ const getUsers = (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
       console.error("error finding all users", err);
+      res.json(err);
     }
 
     res.send({ users });
@@ -16,6 +17,7 @@ const getUserById = (req, res) => {
   User.find({ userId: req.userId }, (err, user) => {
     if (err) {
       console.error("error getting user by id", err);
+      res.json(err);
     }
 
     res.send({ user: user });
@@ -32,6 +34,7 @@ const addUser = (req, res) => {
   User.create(newUser, (err, user) => {
     if (err) {
       console.error("error adding new user", err);
+      res.json(err);
     }
 
     res.send({ user: user });
@@ -43,6 +46,7 @@ const editUser = (req, res) => {
   User.updateOne({ userId: req.userId }, req.updatedObj, (err, updatedUser) => {
     if (err) {
       console.error("error updating user", err);
+      res.json(err);
     }
     res.send({ updatedUser: updatedUser });
   });
@@ -55,6 +59,7 @@ const delUser = (req, res) => {
   User.deleteOne({ userId: req.userId }, (err, deletedUser) => {
     if (err) {
       console.error("error deleting user", err);
+      res.json(err);
     }
     res.send({ deletedUser: deletedUser });
   });

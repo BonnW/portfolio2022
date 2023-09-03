@@ -48,14 +48,37 @@ const deleteById = (req, res) => {
   });
 };
 
-const editProject = (req, res) => {};
+const editProject = (req, res) => {
+  Project.updateOne(
+    { projectId: req.projectId },
+    req.updatedObj,
+    (err, updatedProject) => {
+      if (err) {
+        console.error("error updated project", err), res.json(err);
+      }
 
-const searchByTitle = (req, res) => {};
+      res.send({ updatedProject: updatedProject });
+    }
+  );
+};
+
+const searchByTitle = (req, res) => {
+  Project.find({ title: req.projectTitle }, (err, result) => {
+    if (err) {
+      console.error("error searching by title", err);
+      res.json(err);
+    } else {
+      res.send({ foundProjects: result });
+    }
+  });
+};
 
 module.exports = {
   findById,
+  searchByTitle,
   getAllProjects,
   newProject,
+  editProject,
   deleteById,
 };
 
