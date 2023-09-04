@@ -43,7 +43,10 @@ const newProject = (req, res) => {
 
 const deleteById = (req, res) => {
   Project.findOneAndDelete(req.body.id, (err, deleted) => {
-    if (err) res.json(err);
+    if (err) {
+      console.error(err);
+      res.json(err);
+    }
     res.json(deleted);
   });
 };
@@ -55,9 +58,9 @@ const editProject = (req, res) => {
     (err, updatedProject) => {
       if (err) {
         console.error("error updated project", err), res.json(err);
+      } else {
+        res.send({ updatedProject: updatedProject });
       }
-
-      res.send({ updatedProject: updatedProject });
     }
   );
 };
