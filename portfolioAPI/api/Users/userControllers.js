@@ -2,6 +2,8 @@ const User = require("./userSchema");
 
 // get users
 const getUsers = (req, res) => {
+  console.log("route reached");
+
   User.find({}, (err, users) => {
     if (err) {
       console.error("error finding all users", err);
@@ -56,7 +58,7 @@ const editUser = (req, res) => {
 const delUser = (req, res) => {
   let userId = req.userId;
 
-  User.deleteOne({ userId: req.userId }, (err, deletedUser) => {
+  User.deleteOne({ userId: userId }, (err, deletedUser) => {
     if (err) {
       console.error("error deleting user", err);
       res.json(err);

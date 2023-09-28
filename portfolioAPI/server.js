@@ -23,9 +23,9 @@ const PostsRouter = require("./api/Posts");
 const UsersRouter = require("./api/Users");
 
 // ROUTER ASSIGNMENT
-app.use("/api/Projects", ProjectsRouter);
-app.use("/api/Posts", PostsRouter);
-app.use("/api/Users", UsersRouter);
+app.use("/projects", ProjectsRouter);
+app.use("/posts", PostsRouter);
+app.use("/users", UsersRouter);
 
 app.listen(port);
 console.log("server live on port " + port);

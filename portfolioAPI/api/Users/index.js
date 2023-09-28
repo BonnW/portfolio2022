@@ -10,7 +10,7 @@ const {
   delUser,
 } = require("./userControllers");
 
-router.get("/users", getUsers);
+router.get("/allusers", getUsers);
 router.get("/user/:userId", getUserById);
 router.post("/addUser", addUser);
 router.put("/editUser", editUser);
