@@ -1,0 +1,28 @@
+{
+  "projects": [
+    {
+      "title": "test4",
+      "details": "This projects module is much more work than anticipated",
+      "projectTech": ["Javascript", "ReactJS", "MaterialUI"],
+      "projectLink": "linkylink.link"
+    },
+    {
+      "title": "test4",
+      "details": "This projects module is much more work than anticipated",
+      "projectTech": ["Javascript", "ReactJS", "MaterialUI"],
+      "projectLink": "linkylink.link"
+    },
+    {
+      "title": "test4",
+      "details": "This projects module is much more work than anticipated",
+      "projectTech": ["Javascript", "ReactJS", "MaterialUI"],
+      "projectLink": "linkylink.link"
+    },
+    {
+      "title": "test4",
+      "details": "This projects module is much more work than anticipated",
+      "projectTech": ["Javascript", "ReactJS", "MaterialUI"],
+      "projectLink": "linkylink.link"
+    }
+  ]
+}
