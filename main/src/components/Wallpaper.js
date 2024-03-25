@@ -13,7 +13,7 @@ const sidebarWidth = 260;
 const StyledBox = styled("div")({
   flexGrow: 1,
   backgroundImage: `url(${lofi})`,
-  backgroundColor: "green",
+  backgroundColor: "black",
   height: "100vh",
   width: `calc(100vw - ${sidebarWidth}px)`,
   marginLeft: `${sidebarWidth}px`,

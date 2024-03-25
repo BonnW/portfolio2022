@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
       case "About Me":
         return <Posts />;
       case "Projects":
-        return <Projects />;
+        return <Projects handleClosePopover={this.handleClose} />;
       default:
         return <Projects />;
     }
@@ -105,13 +105,18 @@ class Sidebar extends React.Component {
           open={this.state.popOpen}
           anchorEl={this.state.AnchorEl}
           onClose={this.handleClose}
+          anchorReference="anchorPosition"
+          anchorPosition={{ top: 40, left: 0 }} // Adjust left position to account for sidebar width
           anchorOrigin={{
             vertical: "center",
             horizontal: "right",
           }}
           transformOrigin={{
-            vertical: "center",
+            vertical: "top",
             horizontal: "left",
+          }}
+          PaperProps={{
+            style: { marginLeft: 260, marginRight: 20 },
           }}
         >
           {/* <h1>hello world</h1> */}

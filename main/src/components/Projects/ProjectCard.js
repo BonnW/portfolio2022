@@ -5,16 +5,16 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 import pic from "../../assets/GitHubLogo.png";
 
-const auth = true;
-const axios = require("axios");
-
 export default function ProjectCard(props) {
+  console.log(props);
+  let hyperLinkURL = props.project.projectLink;
   return (
     <Card
-      key={props.projects._id}
+      key={props._id}
       sx={{
         bgcolor: "#fdf6c0",
       }}
@@ -37,23 +37,16 @@ export default function ProjectCard(props) {
             my: 1,
           }}
         >
-          {props.projects.title}
+          {props.project.title}
         </Typography>
-        <Typography gutterBottom>{props.projects.details}</Typography>
-        <Typography>{props.projects.projectTech.join(" - ")}</Typography>
-        <Typography variant="button">{props.projects.projectLink}</Typography>
-        {auth ? (
-          <CardActions>
-            <Button>Edit</Button>
-            <Button
-              onClick={() => {
-                props.deleteProject(props.projects._id);
-              }}
-            >
-              Delete
-            </Button>
-          </CardActions>
-        ) : null}
+        <Typography gutterBottom>{props.project.details}</Typography>
+        {hyperLinkURL !== "private" ? (
+          <Link target="_blank" href={hyperLinkURL}>
+            {hyperLinkURL}
+          </Link>
+        ) : (
+          <Typography>Private</Typography>
+        )}
       </CardContent>
     </Card>
   );

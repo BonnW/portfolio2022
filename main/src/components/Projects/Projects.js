@@ -1,52 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-
-import pic from "../../assets/GitHubLogo.png";
 
 import ProjectCard from "./ProjectCard";
+import projectsData from "../../data/projects.json";
+import { Typography, Button } from "@mui/material";
+import XIcon from "@mui/icons-material/X";
 
-const axios = require("axios");
+export default function Projects({ handleClosePopover }) {
+  const [loaded, setLoaded] = useState(true);
 
-export default function Projects() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState("");
-  const [loaded, setLoaded] = useState(false);
-
-  const auth = true;
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/projects/all")
-      .then((res) => {
-        setData(res.data);
-        // console.log(projectArr);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoaded(true));
-  }, []);
-
-  function deleteProject(id) {
-    axios
-      .delete("http://localhost:5000/api/projects/delete", {
-        data: { _id: id },
-      })
-      .then((res) => {
-        setData(data.filter((data) => data._id != res.data._id)); // MAKE THIS WORK!!!!!!!!!!!!!!!!
-        // console.log();
-        console.log("deleted ", res);
-      })
-      .catch((err) => setError(err));
-    // console.log(data);
-  }
-
-  if (loaded) console.log(data);
+  const handleButtonClick = () => {
+    handleClosePopover();
+  };
 
   return (
     <Box
@@ -56,26 +22,35 @@ export default function Projects() {
         bgcolor: "#b56147",
       }}
     >
+      <Box
+        sx={{
+          // border: "2px solid black",
+          marginBottom: "40px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h2">Projects</Typography>
+        <Button onClick={handleButtonClick}>
+          <XIcon />
+        </Button>
+      </Box>
       <Grid
         container
         spacing={6}
         direction="row"
         justifyContent="space-around"
         alignItems="center"
-        // sx={{
-        //   border: "10px solid red",
-        // }}
       >
-        {loaded && data
-          ? data.map((p) => (
-              <Grid item xs={2} key={p._id}>
-                <ProjectCard
-                  projects={p}
-                  deleteProject={() => deleteProject()}
-                />
-              </Grid>
-            ))
-          : "FAILED"}
+        {loaded && projectsData ? (
+          projectsData.map((project) => (
+            <Grid item xs={12} sm={6} md={4} key={project._id}>
+              <ProjectCard project={project} />
+            </Grid>
+          ))
+        ) : (
+          <p>failed to load projects</p>
+        )}
       </Grid>
     </Box>
   );
