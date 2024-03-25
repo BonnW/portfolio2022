@@ -24,8 +24,8 @@ export default function AboutMe({ handleClosePopover }) {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h2">About Me</Typography>
-        <Button onClick={handleButtonClick}>
+        <Typography variant="h3">About Me?</Typography>
+        <Button sx={{ color: "#664455" }} onClick={handleButtonClick}>
           <XIcon />
         </Button>
       </Box>

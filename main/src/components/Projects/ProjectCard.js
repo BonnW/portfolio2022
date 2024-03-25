@@ -16,7 +16,7 @@ export default function ProjectCard(props) {
     <Card
       key={props._id}
       sx={{
-        bgcolor: "#fdf6c0",
+        bgcolor: "#fbf6cb",
       }}
     >
       <CardContent>

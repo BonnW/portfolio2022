@@ -4,22 +4,33 @@ import Grid from "@mui/material/Grid";
 
 import ProjectCard from "./ProjectCard";
 import projectsData from "../../data/projects.json";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Fade } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 
 export default function Projects({ handleClosePopover }) {
   const [loaded, setLoaded] = useState(true);
+  const [faded, setFaded] = useState(false);
 
   const handleButtonClick = () => {
     handleClosePopover();
   };
+
+  const triggerFadein = () => {
+    console.log(faded);
+    console.log("add fade in effect");
+    setFaded(true);
+  };
+
+  useState(() => {
+    setTimeout(triggerFadein, 300);
+  }, []);
 
   return (
     <Box
       sx={{
         border: "2px solid black",
         padding: "30px",
-        bgcolor: "#b56147",
+        bgcolor: "#64455",
       }}
     >
       <Box
@@ -30,8 +41,12 @@ export default function Projects({ handleClosePopover }) {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h2">Projects</Typography>
-        <Button onClick={handleButtonClick}>
+        <Fade in={faded}>
+          <Typography variant="h3">
+            "Here are a few of the projects I've worked on"
+          </Typography>
+        </Fade>
+        <Button sx={{ color: "#664455" }} onClick={handleButtonClick}>
           <XIcon />
         </Button>
       </Box>
@@ -44,7 +59,7 @@ export default function Projects({ handleClosePopover }) {
       >
         {loaded && projectsData ? (
           projectsData.map((project) => (
-            <Grid item xs={12} sm={6} md={4} key={project._id}>
+            <Grid item xs={6} sm={2} md={3} key={project._id}>
               <ProjectCard project={project} />
             </Grid>
           ))

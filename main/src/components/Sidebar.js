@@ -13,7 +13,7 @@ import Header from "./Header.js";
 import Projects from "./Projects/Projects.js";
 import Posts from "./Posts/Posts.js";
 import AboutMe from "./AboutMe.js";
-import Resume from "./Resume.js";
+import Resume from "./Resume/Resume.js";
 
 const sidebarWidth = 260;
 
@@ -123,7 +123,7 @@ class Sidebar extends React.Component {
             style: {
               marginLeft: 260,
               marginRight: 20,
-              backgroundColor: "#b56147",
+              backgroundColor: "#f0a05a",
             },
           }}
         >
