@@ -12,6 +12,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import Header from "./Header.js";
 import Projects from "./Projects/Projects.js";
 import Posts from "./Posts/Posts.js";
+import AboutMe from "./AboutMe.js";
+import Resume from "./Resume.js";
 
 const sidebarWidth = 260;
 
@@ -50,9 +52,11 @@ class Sidebar extends React.Component {
   renderSwitch(element) {
     switch (element) {
       case "About Me":
-        return <Posts />;
+        return <AboutMe handleClosePopover={this.handleClose} />;
       case "Projects":
         return <Projects handleClosePopover={this.handleClose} />;
+      case "Resume":
+        return <Resume handleClosePopover={this.handleClose} />;
       default:
         return <Projects />;
     }
@@ -116,7 +120,11 @@ class Sidebar extends React.Component {
             horizontal: "left",
           }}
           PaperProps={{
-            style: { marginLeft: 260, marginRight: 20 },
+            style: {
+              marginLeft: 260,
+              marginRight: 20,
+              backgroundColor: "#b56147",
+            },
           }}
         >
           {/* <h1>hello world</h1> */}
