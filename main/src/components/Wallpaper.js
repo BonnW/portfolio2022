@@ -30,12 +30,22 @@ const YouTubePlayer = ({ videoId }) => {
   let player;
 
   useEffect(() => {
-    // init youtube player when component mounts
-    const script = document.createElement("script");
-    script.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(script);
+    // on mount, check to see if the API script is already loaded
+    if (!window.YT) {
+      // If not, load the script asynchronously
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
 
-    window.onYouTubeIframeAPIReady = initilizePlayer;
+      // onYouTubeIframeAPIReady will load the video after the script is loaded
+      window.onYouTubeIframeAPIReady = this.initilizePlayer;
+      document.body.appendChild(script);
+    } else {
+      initilizePlayer();
+    }
+
+    // init youtube player when component mounts
+
+    // window.onYouTubeIframeAPIReady = initilizePlayer;
 
     // Cleanup function to remove the youtube player when component unmounts
     return () => {
@@ -46,31 +56,31 @@ const YouTubePlayer = ({ videoId }) => {
   }, []);
 
   const initilizePlayer = () => {
-    console.log("initilizing yt player");
-    player = new window.YT.Player("youtube-player", {
-      height: "390",
-      width: "640",
-      videoId: videoId,
-      playerVars: {
-        autoplay: 1,
-        controls: 1,
-        rel: 0,
-      },
-      events: {
-        onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange,
-      },
+    window.YT.ready(() => {
+      player = new window.YT.Player("youtube-player", {
+        height: "390",
+        width: "640",
+        videoId: videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          rel: 0,
+        },
+        events: {
+          // onReady: onPlayerReady,
+          // onStateChange: onPlayerStateChange,
+        },
+      });
     });
   };
 
-  const onPlayerReady = (event) => {
-    console.log("player ready event triggered");
-    event.target.playVideo();
-  };
+  // const onPlayerReady = (event) => {
+  //   event.target.playVideo();
+  // };
 
-  const onPlayerStateChange = (event) => {
-    console.log("player state change event triggered", event.data);
-  };
+  // const onPlayerStateChange = (event) => {
+  //   console.log("player state change event triggered", event.data);
+  // };
 
   return (
     <div

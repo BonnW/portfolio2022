@@ -1,8 +1,18 @@
-import React from "react";
-import { Container, Typography, Box, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Container, Typography, Box, Button, Fade } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 
 export default function AboutMe({ handleClosePopover }) {
+  const [faded, setFaded] = useState(false);
+
+  const triggerFadein = () => {
+    setFaded(true);
+  };
+
+  useState(() => {
+    setTimeout(triggerFadein, 300);
+  }, []);
+
   const handleButtonClick = () => {
     handleClosePopover();
   };
@@ -34,13 +44,19 @@ export default function AboutMe({ handleClosePopover }) {
           paddingBottom: "20px",
         }}
       >
-        <Typography variant="h4">
-          Experienced IT and Software professional with a versatile skill set
-          spanning technical support, project management, and web development.
-          With a demonstrated history of delivering impactful solutions across
-          various industries, I excel in optimizing systems, enhancing user
-          experiences, and driving operational efficiency.
-        </Typography>
+        <Fade in={faded}>
+          <Typography variant="h4" gutterBottom>
+            Experienced IT and Software professional with a versatile skill set
+            spanning technical support, project management, and web development.
+          </Typography>
+        </Fade>
+        <Fade in={faded}>
+          <Typography variant="h4">
+            With a demonstrated history of delivering impactful solutions across
+            various industries, I excel in optimizing systems, enhancing user
+            experiences, and driving operational efficiency.
+          </Typography>
+        </Fade>
       </Box>
     </Container>
   );

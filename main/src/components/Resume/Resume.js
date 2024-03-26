@@ -40,8 +40,8 @@ export default function Resume({ handleClosePopover }) {
         }}
       >
         <Fade in={faded}>
-          <Typography variant="h3">
-            "Here is my latest resume as of March 25th, 2024"
+          <Typography variant="h4">
+            "Sure! Here's a copy of my Resume."
           </Typography>
         </Fade>
         <Button sx={{ color: "#664455" }} onClick={handleButtonClick}>

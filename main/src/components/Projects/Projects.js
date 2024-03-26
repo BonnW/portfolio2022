@@ -16,8 +16,6 @@ export default function Projects({ handleClosePopover }) {
   };
 
   const triggerFadein = () => {
-    console.log(faded);
-    console.log("add fade in effect");
     setFaded(true);
   };
 
@@ -42,7 +40,7 @@ export default function Projects({ handleClosePopover }) {
         }}
       >
         <Fade in={faded}>
-          <Typography variant="h3">
+          <Typography variant="h4">
             "Here are a few of the projects I've worked on"
           </Typography>
         </Fade>
